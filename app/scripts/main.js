@@ -26,9 +26,7 @@ $(document).ready(function() {
         event.preventDefault();
         var viewportHeight2 = $(window).height();
 
-        $('html, body').animate({
-            scrollTop: 2 * viewportHeight2
-        }, 500);
+        $("html, body").animate({ scrollTop: $(document).height()-viewportHeight2 });
     });
 
 
