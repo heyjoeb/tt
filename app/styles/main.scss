@@ -1,31 +1,770 @@
-// bower:scss
-// endbower
-
-body {
-  background: #fafafa;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
-}
-
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-}
-
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+// -------------------------------  EFFECTS
+@mixin effect_color {
+    -webkit-transition: color 0.6s ease;
+    -moz-transition: color 0.6s ease;
+    -o-transition: color 0.6s ease;
+    transition: color 0.6s ease;
+}
+@mixin effect_opacity {
+    -webkit-transition: opacity 0.6s ease;
+    -moz-transition: opacity 0.6s ease;
+    -o-transition: opacity 0.6s ease;
+    transition: opacity 0.6s ease;
+}
+@mixin effect_bg {
+    -webkit-transition: background-color 0.6s ease;
+    -moz-transition: background-color 0.6s ease;
+    -o-transition: background-color 0.6s ease;
+    transition: background-color 0.6s ease;
+}
+
+
+// -------------------------------  MEDIA QUERIES
+@mixin breakpoint($point) {
+    @if $point == xl {
+        @media (max-width: 1367px) and (min-height:500px) { @content; }
+    }
+    @else if $point == lrg {
+        @media (max-width: 1199px) { @content; }
+    }
+    @else if $point == md {
+        @media (max-width: 991px) { @content; }
+    }
+    @else if $point == sm {
+        @media (max-width: 800px)  { @content; }
+    }
+    @else if $point == xs {
+        @media (max-width: 550px)  { @content; }
+    }
+    @else if $point == xxs {
+        @media (max-width: 450px)  { @content; }
+    }
+}
+
+
+/*   ----------------------------------------------------
+
+GENERAL
+
+-------------------------------------------------------  */  
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html, body {
+  min-height: 100%;
+  background: #e8e8e8;
+  margin: 0;
+}
+
+
+/*   ----------------------------------------------------
+
+SCREEN 01
+
+-------------------------------------------------------  */ 
+.screen01 {
+  position: relative;
+  overflow: hidden;
+  .bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    background-size: cover;
+    background: url('../images/01bg.png');
+    z-index: 0;
+  }
+  .city {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+    animation-delay: 0.5s;
+    text-align: center;
+    img {
+      max-width: 100%;
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+    }
+  }
+  .clouds {
+    visibility: hidden;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+    animation-delay: 0.5s;
+    text-align: center;
+    @include breakpoint(xl) { 
+      top: -20%;
+    }
+    @include breakpoint(md) { 
+      top: 5%;
+    }
+    img {
+      max-width: 100%;
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+    }
+  }
+  .air-balloon {
+    visibility: hidden;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    z-index: 1;
+    width: 85px;
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 1s;
+    @include breakpoint(md) { 
+      top: 10%;
+    }
+    img {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+  .plane {
+    position: absolute;
+    z-index: 1;
+    left: -20%;
+    top: 10%;
+    width: 120%;
+    img {
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+    }
+  }
+  /* plane animation */
+  .fly{
+    animation-name: fly;
+    -webkit-animation-name: fly; 
+
+    animation-duration: 10s; 
+    -webkit-animation-duration: 10s;
+
+    animation-timing-function: linear; 
+    -webkit-animation-timing-function: linear;   
+
+    visibility: visible !important; 
+  }
+  @keyframes fly {
+    0% {
+      transform: translate3d(-20%, 35%, 0px);
+    }
+    100% {
+      transform: translate3d(100%, 0%, 0px);
+    } 
+  }
+  @-webkit-keyframes fly {
+    0% {
+      -webkit-transform: translate3d(-20%, 35%, 0px);
+    }    
+    100% {
+      -webkit-transform: translate3d(100%, 0%, 0px);
+    }
+  }
+  /* end plane animation */
+  .logo {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    width: 330px;
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 1s;
+    img {
+      width: 100%;
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+      -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+      animation-delay: 0.5s;
+    }
+  }
+  .txt {
+    visibility: hidden;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    margin-left: -232.5px;
+    z-index: 3;
+    width: 465px;
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 1s;
+    @include breakpoint(xs) { 
+      width: 60%;
+      margin-left: -30%;
+      left: 50%;
+    }
+    img {
+      width: 100%;
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+      -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+      animation-delay: 0.5s;
+    }
+  }
+  .btn-container {
+    visibility: hidden;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    width: 53px;
+    margin-left: -26.5px;
+    z-index: 3;
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 1s;
+    img {
+      width: 100%;
+      opacity: 0;
+      -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+      animation: 1s ease 0s normal forwards 1 fadein;
+      -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+      animation-delay: 0.5s;
+    }
+  }
+}
+/*   ----------------------------------------------------
+
+SCREEN 02
+
+-------------------------------------------------------  */ 
+.screen02 {
+  position: relative;
+  overflow: hidden;
+  .bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    background: url('../images/02bg.png');
+    background-size: cover;
+    z-index: 0;
+  }
+  .man {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 470px;
+    margin-left: -235px;
+    z-index: 1;
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 1s;
+    height: 816px;
+    @include breakpoint(xl) { 
+      height: 545px;
+    }
+    @media only screen and (max-width: 450px) and (max-height: 500px)  {
+        bottom: -410px;
+    }
+    .manImg {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+  .buttons {
+    width: 100%;
+    height: 180px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    visibility: hidden;
+    z-index: 10;
+    -webkit-animation-delay: 1.5s; /* Chrome, Safari, Opera */
+    animation-delay: 1.5s;
+    @media only screen and (max-width: 350px)  {
+        height: 120px;
+      }
+    .buttonsBg {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background: url('../images/02buttonsBg.png');
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      position: relative;
+    }
+    .animationOpacity {
+      -webkit-animation: 1.5s ease 0s normal forwards 1 fadein;
+      animation: 1.5s ease 0s normal forwards 1 fadein;
+      -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+      animation-delay: 0.5s;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      text-align: center;
+      width: 90%;
+      margin: 0 auto;
+      overflow: hidden;
+      padding-top: 45px;
+      background: #d7d9cc;
+      height: 100%;
+      z-index: 4;
+      position: relative;
+      @include breakpoint(sm) { 
+        width: 100%;
+        padding-top: 5px;
+        text-align: center;
+      }
+    }
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      @include breakpoint(sm) { 
+         width: 25% 
+        }
+        @include breakpoint(xs) { 
+         width: 20% 
+        }
+        @include breakpoint(xxs) { 
+         width: 15% 
+        }
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        height: 90px;
+        display: block;
+        line-height: 90px;
+        @include breakpoint(sm) { 
+          display: inline-block;
+        }
+        img {
+          vertical-align: middle; 
+          display: inline-block;
+          @include breakpoint(sm) { 
+         width: 100%;
+        }
+        }
+      }
+    }
+  }
+  .shades {
+    position: absolute;
+    right: 105px;
+    top: 60px;
+    z-index: 2;
+  }
+  .cocoLoco {
+    position: absolute;
+    left: 15px;
+    top: 50px;
+    z-index: 2;
+  }
+  .house {
+    position: absolute;
+    right: 0;
+    bottom: 140px;
+    z-index: 2;
+    img {
+      width: 100%;
+    }
+  }
+  .car {
+    position: absolute;
+    left: 0;
+    bottom: 150px;
+    z-index: 3;
+  }
+  .hat {
+    position: absolute;
+    right: 40px;
+    top: -50px;
+    z-index: 2;
+  }
+  .prop {
+    opacity: 0;
+    &.show {
+      opacity: 1;
+    }
+  }
+  .btn-container {
+    bottom: 60px;
+    left: 50%;
+    margin-left: -26.5px;
+    position: absolute;
+    width: 53px;
+    z-index: 3;
+    img {
+      width: 100%;
+    }
+  }
+}
+/*   ----------------------------------------------------
+
+SCREEN 03
+
+-------------------------------------------------------  */ 
+.screen03 {
+  position: relative;
+  .foto {
+    visibility: hidden;
+    text-align: center;
+    img {
+      @include breakpoint(sm) { 
+          width: 100%;
+        }
+    }
+  }
+  .txt01 {
+    visibility: hidden;
+    text-align: center;
+    img {
+      @include breakpoint(sm) { 
+          width: 100%;
+        }
+    }
+  }
+  .txt02 {
+    visibility: hidden;
+    text-align: center;
+    padding: 35px 0;
+    img {
+      display: inline-block;
+      max-width: 100%;
+      @include breakpoint(sm) { 
+          width: 100%;
+        }
+    }
+  }
+  .btnGoTo {
+    visibility: hidden;
+    text-align: center;
+    img {
+      @include breakpoint(sm) { 
+          max-width: 100%;
+        }
+    }
+  }
+}
+
+/*   ----------------------------------------------------
+
+ANIMATIONS
+
+-------------------------------------------------------  */ 
+.animationOpacity {
+  -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+  animation: 1s ease 0s normal forwards 1 fadein;
+  -webkit-animation-delay: 0.5s; /* Chrome, Safari, Opera */
+  animation-delay: 0.5s;
+}
+/* fadein animation*/
+@keyframes fadein{
+    0% { opacity:0; }
+    66% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-webkit-keyframes fadein{
+    0% { opacity:0; }
+    66% { opacity:0; }
+    100% { opacity:1; }
+}
+ /* end fadein animation */
+.slideDown{
+  animation-name: slideDown;
+  -webkit-animation-name: slideDown;  
+
+  animation-duration: 1s; 
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;  
+  -webkit-animation-timing-function: ease;  
+
+  visibility: visible !important;           
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  50%{
+    transform: translateY(0%);
+  }
+  65%{
+    transform: translateY(-2%);
+  }
+  80%{
+    transform: translateY(1%);
+  }
+  95%{
+    transform: translateY(-1%);
+  }     
+  100% {
+    transform: translateY(0%);
+  }   
+}
+
+@-webkit-keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(-100%);
+  }
+  50%{
+    -webkit-transform: translateY(0%);
+  }
+  65%{
+    -webkit-transform: translateY(-2%);
+  }
+  80%{
+    -webkit-transform: translateY(1%);
+  }
+  95%{
+    -webkit-transform: translateY(-1%);
+  }     
+  100% {
+    -webkit-transform: translateY(0%);
+  } 
+}
+
+/*
+==============================================
+slideUp
+==============================================
+*/
+
+
+.slideUp{
+  animation-name: slideUp;
+  -webkit-animation-name: slideUp;  
+
+  animation-duration: 1s; 
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;  
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;     
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  50%{
+    transform: translateY(0%);
+  }
+  65%{
+    transform: translateY(2%);
+  }
+  80%{
+    transform: translateY(-1%);
+  }
+  95%{
+    transform: translateY(1%);
+  }     
+  100% {
+    transform: translateY(0%);
+  } 
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(100%);
+  }
+  50%{
+    -webkit-transform: translateY(0%);
+  }
+  65%{
+    -webkit-transform: translateY(2%);
+  }
+  80%{
+    -webkit-transform: translateY(-1%);
+  }
+  95%{
+    -webkit-transform: translateY(1%);
+  }     
+  100% {
+    -webkit-transform: translateY(0%);
+  } 
+}
+
+/*
+==============================================
+slideLeft
+==============================================
+*/
+
+
+.slideLeft{
+  animation-name: slideLeft;
+  -webkit-animation-name: slideLeft;  
+
+  animation-duration: 1s; 
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease-in-out; 
+  -webkit-animation-timing-function: ease-in-out;   
+
+  visibility: visible !important; 
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(150%);
+  }
+  50%{
+    transform: translateX(0%);
+  }
+  65%{
+    transform: translateX(2%);
+  }
+  80%{
+    transform: translateX(-1%);
+  }
+  95%{
+    transform: translateX(1%);
+  }     
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slideLeft {
+  0% {
+    -webkit-transform: translateX(150%);
+  }
+  50%{
+    -webkit-transform: translateX(0%);
+  }
+  65%{
+    -webkit-transform: translateX(2%);
+  }
+  80%{
+    -webkit-transform: translateX(-1%);
+  }
+  95%{
+    -webkit-transform: translateX(1%);
+  }     
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+/*
+==============================================
+slideRight
+==============================================
+*/
+
+
+.slideRight{
+  animation-name: slideRight;
+  -webkit-animation-name: slideRight; 
+
+  animation-duration: 1s; 
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease-in-out; 
+  -webkit-animation-timing-function: ease-in-out;   
+
+  visibility: visible !important; 
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-150%);
+  }
+  50%{
+    transform: translateX(0%);
+  }
+  65%{
+    transform: translateX(-2%);
+  }
+  80%{
+    transform: translateX(2%);
+  }
+  95%{
+    transform: translateX(-1%);
+  }     
+  100% {
+    transform: translateX(0%);
+  } 
+}
+
+@-webkit-keyframes slideRight {
+  0% {
+    -webkit-transform: translateX(-150%);
+  }
+  50%{
+    -webkit-transform: translateX(0%);
+  }
+  65%{
+    -webkit-transform: translateX(-2%);
+  }
+  80%{
+    -webkit-transform: translateX(2%);
+  }
+  95%{
+    -webkit-transform: translateX(-1%);
+  }     
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+/*
+==============================================
+floating
+==============================================
+*/
+
+.floating{
+  animation-name: floating;
+  -webkit-animation-name: floating;
+
+  animation-duration: 3s; 
+  -webkit-animation-duration: 3s;
+
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0%);  
+  }
+  50% {
+    transform: translateY(8%);  
+  } 
+  100% {
+    transform: translateY(0%);
+  }     
+}
+
+@-webkit-keyframes floating {
+  0% {
+    -webkit-transform: translateY(0%);  
+  }
+  50% {
+    -webkit-transform: translateY(4%);  
+  } 
+  100% {
+    -webkit-transform: translateY(0%);
+  }     
 }
