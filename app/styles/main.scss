@@ -190,6 +190,9 @@ SCREEN 01
     width: 330px;
     -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
     animation-delay: 1s;
+    @media only screen and (max-width: 450px) and (max-height: 600px)  {
+        width: 185px;
+    }
     img {
       width: 100%;
       opacity: 0;
